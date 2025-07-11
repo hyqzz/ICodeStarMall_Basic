@@ -1,4 +1,4 @@
-# 商城系统 (Seafood Mall System)
+# 商城系统 (ICodeStar Mall System)
 
 ## 项目简介
 
