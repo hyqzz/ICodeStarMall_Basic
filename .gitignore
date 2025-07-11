@@ -1,0 +1,55 @@
+# Java/Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+*.log
+
+# Node.js/前端
+node_modules/
+dist/
+build/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# 微信小程序
+miniprogram_npm/
+project.private.config.json
+
+# VSCode/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Mac/Linux/Windows系统文件
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# 其他常见忽略
+*.bak
+*.tmp
+*.temp
+*.orig
+
+# 生成的 jar 包
+*.jar
+*.jar.original
+
+# 其他
+*.class
+*.log
+joolun-wx/bin/clean.ps1
+joolun-wx/bin/package.ps1
+joolun-wx/bin/run.bat
+joolun-wx/bin/run.ps1
+
+# 敏感配置
+*-private.key
+*-cert.pem
