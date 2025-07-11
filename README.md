@@ -2,7 +2,7 @@
 
 ## 项目简介
 
-本项目由 ICodeStar 智码星科技 制作，MIT真开源，可以任意使用但请保留版权信息
+本项目由 ICodeStar 智码星科技 开发制作，该项目已MIT开源，欢迎学习使用，开发不易，使用还请保留版权信息
 https://www.icodestar.net
 
 
