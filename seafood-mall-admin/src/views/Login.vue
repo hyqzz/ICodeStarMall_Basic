@@ -11,7 +11,6 @@
     <el-card class="login-card">
       <template #header>
         <div class="card-header">
-          <img src="../assets/logo.png" alt="Logo" class="logo" />
           <h2>智码星商城后台管理系统</h2>
         </div>
       </template>
@@ -123,6 +122,21 @@
         </el-tab-pane>
       </el-tabs>
     </el-card>
+    
+    <!-- 演示账号信息 -->
+    <div class="demo-accounts">
+      <div>后端Admin演示账号密码：<br>superadmin / admin123</div>
+      <br>
+      <div>
+        <div>前端H5演示地址：</div>
+        <a href="https://h5-mall.demo.icodestar.net" target="_blank" class="copyright-link h5-demo-link">https://h5-mall.demo.icodestar.net</a>
+      </div>
+    </div>
+    <!-- 版权信息 -->
+    <div class="copyright">
+      <span>ICodeStar 智码星科技</span><br>
+      <a href="https://www.icodestar.net" target="_blank" class="copyright-link">https://www.icodestar.net</a>
+    </div>
   </div>
 </template>
 
@@ -258,11 +272,21 @@ const handleRegister = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f2f5;
+  background: url('@/assets/login.png') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
 }
 
 .login-card {
+  position: relative;
+  z-index: 1;
   width: 400px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(2px);
+  border: none;
 }
 
 .card-header {
@@ -281,5 +305,70 @@ const handleRegister = async () => {
 
 .login-tabs .el-tabs__header {
   margin-bottom: 20px;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #666;
+}
+
+.copyright-text {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.copyright-link {
+  color: #666;
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.copyright-link:hover {
+  text-decoration: underline;
+}
+
+.demo-accounts {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  bottom: 140px;
+  text-align: left;
+  color: #222;
+  font-size: 14px;
+  line-height: 1.7;
+  z-index: 2;
+  pointer-events: none;
+}
+@media (max-width: 500px) {
+  .demo-accounts {
+    width: 90vw;
+    min-width: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+  }
+}
+.demo-accounts a,
+.demo-accounts .copyright-link {
+  color: #666;
+  text-decoration: none;
+  pointer-events: auto;
+}
+.demo-accounts a:hover,
+.demo-accounts .copyright-link:hover {
+  text-decoration: underline;
+  color: #409eff;
+}
+.h5-demo-link {
+  display: block;
+  padding-left: 0;
+  margin-left: 0;
+  word-break: break-all;
 }
 </style> 

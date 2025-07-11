@@ -24,15 +24,15 @@ export default defineConfig({
     port: 5174, // Frontend runs on port 5174
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:9000',
         changeOrigin: true,
       },
       '/uploads': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:9000',
         changeOrigin: true,
       }
     },
-    allowedHosts: ['icodestar.dynv6.net']
+    allowedHosts: ['h5-mall.demo.icodestar.net','admin-mall.demo.icodestar.net']
   },
   css: {
     postcss: {

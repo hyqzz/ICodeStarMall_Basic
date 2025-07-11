@@ -8,6 +8,7 @@
 
 <template>
   <div class="login-container">
+    <h2 class="login-title">登录</h2>
     <van-form @submit="onSubmit">
       <van-cell-group inset>
         <van-field
@@ -35,6 +36,29 @@
         </van-button>
       </div>
     </van-form>
+    
+    <!-- 演示账号信息 -->
+    <div class="demo-accounts">
+      <div class="demo-section">
+        <div class="demo-title">前端H5演示账号密码：</div>
+        <div class="demo-content">user / user123</div>
+      </div>
+      <br>
+      <div class="demo-section">
+        <div class="demo-title">后端管理地址：</div>
+        <div class="demo-content">
+          <a href="https://admin-mall.demo.icodestar.net" target="_blank" class="demo-link">https://admin-mall.demo.icodestar.net</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 版权信息 -->
+    <div class="copyright">
+      <div class="copyright-text">
+        <span>ICodeStar 智码星科技</span>
+        <a href="https://www.icodestar.net" target="_blank" class="copyright-link">https://www.icodestar.net</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -83,6 +107,109 @@ const goToRegister = () => {
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-  padding-top: 10vh; /* 调整此值以控制内容离顶部的距离 */
+  position: relative;
+  background: url('@/assets/login.png') no-repeat center center;
+  background-size: cover;
+  padding-top: 80px;
+}
+
+.login-title {
+  color: #222;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 32px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.logo-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.logo-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.demo-accounts {
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #f7f8fa;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.demo-section {
+  margin-bottom: 12px;
+}
+
+.demo-section:last-child {
+  margin-bottom: 0;
+}
+
+.demo-title {
+  font-size: 14px;
+  color: #323233;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.demo-content {
+  font-size: 13px;
+  color: #646566;
+  word-break: break-all;
+}
+
+.demo-link {
+  color: #1989fa;
+  text-decoration: none;
+}
+
+.demo-link:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.copyright-text {
+  font-size: 12px;
+  color: #969799;
+  line-height: 1.4;
+}
+
+.copyright-link {
+  color: #1989fa;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.copyright-link:hover {
+  text-decoration: underline;
+}
+
+/* 输入框区域完全透明 */
+.van-cell-group,
+.van-cell,
+.van-field,
+.van-field__control,
+.van-cell__value,
+.van-cell__title {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 注册下方演示账号信息区域完全透明 */
+.demo-accounts {
+  background: transparent !important;
+  box-shadow: none !important;
 }
 </style> 

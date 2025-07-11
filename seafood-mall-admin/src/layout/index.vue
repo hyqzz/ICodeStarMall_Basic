@@ -74,6 +74,14 @@
       <el-main>
         <router-view></router-view>
       </el-main>
+      
+      <!-- 版权信息 -->
+      <el-footer class="footer">
+        <div class="copyright">
+          <span>智码星科技</span>
+          <a href="https://www.icodestar.net" target="_blank" class="copyright-link">https://www.icodestar.net</a>
+        </div>
+      </el-footer>
     </el-container>
   </el-container>
 </template>
@@ -164,5 +172,31 @@ const handleLogout = () => {
 .el-main {
   background-color: #f0f2f5;
   padding: 20px;
+}
+
+.footer {
+  background-color: #fff;
+  border-top: 1px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 0;
+}
+
+.copyright {
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+}
+
+.copyright-link {
+  color: #409EFF;
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.copyright-link:hover {
+  text-decoration: underline;
 }
 </style> 

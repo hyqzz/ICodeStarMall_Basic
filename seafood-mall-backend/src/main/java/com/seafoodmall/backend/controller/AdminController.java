@@ -15,6 +15,8 @@ import com.seafoodmall.backend.dto.AdminRegisterRequest;
 import com.seafoodmall.backend.service.AdminUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -24,6 +26,10 @@ public class AdminController {
 
     @Autowired
     private AdminUserService adminUserService;
+
+    @Autowired
+    @Qualifier("adminAuthenticationManager")
+    private AuthenticationManager adminAuthenticationManager;
 
     @PostMapping("/register")
     public Result<Void> register(@RequestBody AdminRegisterRequest request) {

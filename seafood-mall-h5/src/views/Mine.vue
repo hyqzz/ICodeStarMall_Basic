@@ -7,7 +7,6 @@
 -->
 
 <template>
-  <van-nav-bar title="我的" fixed placeholder />
   <div class="mine-container">
     <template v-if="!userStore.isLoggedIn">
       <van-cell-group inset class="login-register-group">
@@ -128,8 +127,7 @@ const goToAddresses = () => {
   background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); /* 渐变背景 */
   color: white;
   margin-bottom: 20px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 10px;
 }
 
 .user-avatar {

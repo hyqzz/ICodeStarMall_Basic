@@ -16,10 +16,12 @@ import com.seafoodmall.backend.dto.LoginRequest;
 import com.seafoodmall.backend.dto.LoginResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -29,6 +31,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    @Qualifier("userAuthenticationManager")
+    private AuthenticationManager userAuthenticationManager;
 
     @PostMapping("/register")
     public Result<User> register(@RequestBody User user) {

@@ -62,6 +62,14 @@
         </van-button>
       </div>
     </van-form>
+    
+    <!-- 版权信息 -->
+    <div class="copyright">
+      <div class="copyright-text">
+        <span>ICodeStar 智码星科技</span>
+        <a href="https://www.icodestar.net" target="_blank" class="copyright-link">https://www.icodestar.net</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -109,5 +117,30 @@ const goToLogin = () => {
   align-items: center;
   overflow: hidden;
   padding-top: 10vh;
+  position: relative;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.copyright-text {
+  font-size: 12px;
+  color: #969799;
+  line-height: 1.4;
+}
+
+.copyright-link {
+  color: #1989fa;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.copyright-link:hover {
+  text-decoration: underline;
 }
 </style> 

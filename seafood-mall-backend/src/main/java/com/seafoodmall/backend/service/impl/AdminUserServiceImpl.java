@@ -18,6 +18,7 @@ import com.seafoodmall.backend.service.AdminUserService;
 import com.seafoodmall.backend.util.JwtTokenUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -36,6 +37,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    @Qualifier("adminAuthenticationManager")
     private AuthenticationManager authenticationManager;
 
     @Autowired
