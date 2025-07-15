@@ -40,12 +40,24 @@
     <!-- 演示账号信息 -->
     <div class="demo-accounts">
       <div class="demo-section">
-        <div class="demo-title">前端H5演示账号密码：</div>
+        <div class="demo-title">该项目已MIT开源，欢迎学习使用：</div>
+        <div class="demo-title">gitee地址：</div>
+        <div class="demo-content">
+          <a href="https://gitee.com/heyqzz/icodestarmall_basic" target="_blank" class="demo-link">https://gitee.com/heyqzz/icodestarmall_basic</a>
+        </div>
+        <div class="demo-title">github地址：</div>
+        <div class="demo-content">
+          <a href="https://github.com/hyqzz/ICodeStarMall_Basic" target="_blank" class="demo-link">https://github.com/hyqzz/ICodeStarMall_Basic</a>
+        </div>
+      </div>
+      <br>
+      <div class="demo-section">
+        <div class="demo-title">前端H5商城演示账号密码：</div>
         <div class="demo-content">user / user123</div>
       </div>
       <br>
       <div class="demo-section">
-        <div class="demo-title">后端管理地址：</div>
+        <div class="demo-title">后端管理演示地址：</div>
         <div class="demo-content">
           <a href="https://admin-mall.demo.icodestar.net" target="_blank" class="demo-link">https://admin-mall.demo.icodestar.net</a>
         </div>

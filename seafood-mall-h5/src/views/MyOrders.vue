@@ -9,12 +9,6 @@
 <template>
   <div class="my-orders-container">
     <!-- 顶栏 -->
-    <van-nav-bar
-      title="我的订单"
-      left-arrow
-      @click-left="onClickLeft"
-    />
-
     <!-- 订单状态标签页 -->
     <van-tabs v-model:active="activeStatus" @change="onStatusChange">
       <van-tab title="全部" :name="-1" />
@@ -153,9 +147,7 @@ const currentPage = ref(1);
 const pageSize = 5; // 每页加载5个订单
 const activeStatus = ref<number | undefined>(-1); // 当前选中的订单状态
 
-const onClickLeft = () => {
-  router.back();
-};
+
 
 const orderStatusText = (status: number) => {
   switch (status) {
@@ -278,13 +270,14 @@ const confirmReceipt = async (orderId: number) => {
 };
 
 onMounted(() => {
+  window.scrollTo(0, 0);
   loadOrders();
 });
 </script>
 
 <style scoped>
 .my-orders-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 50px - 40px - 50px); /* 预留tabbar、版权栏、底部操作栏空间 */
   background-color: #f7f8fa;
 }
 

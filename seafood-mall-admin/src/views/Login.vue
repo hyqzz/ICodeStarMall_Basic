@@ -125,13 +125,31 @@
     
     <!-- 演示账号信息 -->
     <div class="demo-accounts">
-      <div>后端Admin演示账号密码：<br>superadmin / admin123</div>
+      <div class="demo-section">
+        <div class="demo-title">该项目已MIT开源，欢迎学习使用：</div>
+        <div class="demo-title">gitee地址：</div>
+        <div class="demo-content">
+          <a href="https://gitee.com/heyqzz/icodestarmall_basic" target="_blank" class="demo-link">https://gitee.com/heyqzz/icodestarmall_basic</a>
+        </div>
+        <div class="demo-title">github地址：</div>
+        <div class="demo-content">
+          <a href="https://github.com/hyqzz/ICodeStarMall_Basic" target="_blank" class="demo-link">https://github.com/hyqzz/ICodeStarMall_Basic</a>
+        </div>
+      </div>
       <br>
-      <div>
-        <div>前端H5演示地址：</div>
-        <a href="https://h5-mall.demo.icodestar.net" target="_blank" class="copyright-link h5-demo-link">https://h5-mall.demo.icodestar.net</a>
+      <div class="demo-section">
+        <div class="demo-title">后端管理演示账号密码(请在桌面端登录)：</div>
+        <div class="demo-content">superadmin / admin123</div>
+      </div>
+      <br>
+      <div class="demo-section">
+        <div class="demo-title">前端H5演示地址：</div>
+        <div class="demo-content">
+          <a href="https://h5-mall.demo.icodestar.net" target="_blank" class="demo-link">https://h5-mall.demo.icodestar.net</a>
+        </div>
       </div>
     </div>
+
     <!-- 版权信息 -->
     <div class="copyright">
       <span>ICodeStar 智码星科技</span><br>
@@ -270,6 +288,7 @@ const handleRegister = async () => {
 .login-container {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: url('@/assets/login.png') no-repeat center center;
@@ -333,11 +352,8 @@ const handleRegister = async () => {
 }
 
 .demo-accounts {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   width: 400px;
-  bottom: 140px;
+  margin: 24px auto 0 auto;
   text-align: left;
   color: #222;
   font-size: 14px;
@@ -346,11 +362,10 @@ const handleRegister = async () => {
   pointer-events: none;
 }
 @media (max-width: 500px) {
+  .login-card,
   .demo-accounts {
     width: 90vw;
     min-width: 0;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 13px;
   }
 }

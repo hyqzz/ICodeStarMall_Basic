@@ -9,12 +9,6 @@
 <template>
   <div class="user-address-edit-container">
     <!-- 顶栏 -->
-    <van-nav-bar
-      :title="isEdit ? '编辑地址' : '新增地址'"
-      left-arrow
-      @click-left="onClickLeft"
-    />
-
     <van-address-edit
       :area-list="areaList"
       :address-info="addressInfo"
@@ -71,9 +65,7 @@ watch(addressId, (newId) => {
   }
 }, { immediate: true });
 
-const onClickLeft = () => {
-  router.back();
-};
+
 
 const fetchAddressDetail = async (id: number) => {
   try {
@@ -192,21 +184,22 @@ const onChangeDetail = (val: string) => {
   }
 };
 
-// onMounted(() => {
-//   if (isEdit.value) {
-//     fetchAddressDetail(addressId.value!);
-//   }
-// });
+onMounted(() => {
+  window.scrollTo(0, 0);
+  if (isEdit.value) {
+    fetchAddressDetail(addressId.value!);
+  }
+});
 </script>
 
 <style scoped>
 .user-address-edit-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 50px - 40px - 50px); /* 预留tabbar、版权栏、底部操作栏空间 */
   display: flex;
   flex-direction: column;
 }
 
-.van-nav-bar {
+.common-nav-bar {
   position: sticky;
   top: 0;
   z-index: 100;

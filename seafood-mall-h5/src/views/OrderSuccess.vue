@@ -8,8 +8,6 @@
 
 <template>
   <div class="order-success-container">
-    <van-nav-bar title="订单成功" fixed placeholder left-arrow @click-left="router.replace('/')" />
-
     <van-empty image="success" description="订单已成功提交！">
       <p v-if="orderId">您的订单号是：{{ orderId }}</p>
       <van-button round type="primary" class="bottom-button" @click="viewOrderDetail">
@@ -45,7 +43,6 @@ const viewOrderDetail = () => {
 
 <style scoped>
 .order-success-container {
-  padding-top: 46px; /* Adjust for fixed van-nav-bar */
   text-align: center;
 }
 

@@ -8,15 +8,8 @@
 
 <template>
   <div class="h5-app" :class="{ 'no-tabbar': !showTabbar }">
-    <van-nav-bar
-      title="智码星商城"
-      fixed
-      placeholder
-      left-arrow
-      @click-left="onClickLeft"
-    />
-    
     <div class="main-content">
+      <CommonNavBar v-if="showHeader" :title="headerTitle" />
       <router-view />
       
       <!-- 版权信息 -->
@@ -41,6 +34,7 @@
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCartStore } from '@/stores/cart'
+import CommonNavBar from '@/components/CommonNavBar.vue'
 
 const activeTab = ref(0)
 const router = useRouter()
@@ -53,9 +47,33 @@ const showTabbar = computed(() => {
   return !['/login', '/register'].includes(route.path)
 })
 
-const onClickLeft = () => {
-  router.back()
+// 全局头部标题映射
+const headerTitleMap: Record<string, string> = {
+  '/': '首页',
+  '/products': '商品列表',
+  '/cart': '购物车',
+  '/order': '订单确认',
+  '/mine': '我的',
+  '/my-orders': '我的订单',
+  '/addresses': '收货地址',
+  '/register': '注册',
+  '/login': '登录',
 }
+
+const showHeader = computed(() => {
+  // 首页也显示头部
+  return true;
+})
+
+const headerTitle = computed(() => {
+  // 动态路由如 /product/123、/order-detail/1
+  if (route.path.startsWith('/product/')) return '商品详情';
+  if (route.path.startsWith('/order-detail/')) return '订单详情';
+  if (route.path.startsWith('/address-edit/')) return '编辑地址';
+  if (route.path.startsWith('/order-success/')) return '下单成功';
+  return headerTitleMap[route.path] || '';
+})
+
 </script>
 
 <style scoped>
@@ -68,13 +86,13 @@ const onClickLeft = () => {
 }
 
 .main-content {
-  min-height: calc(100vh - 46px - 50px); /* 减去导航栏和tabbar的高度 */
+  min-height: calc(100vh - 50px - 40px); /* 减去tabbar和版权栏的高度 */
   display: flex;
   flex-direction: column;
 }
 
 .main-content .no-tabbar {
-  min-height: calc(100vh - 46px); /* 没有tabbar时只减去导航栏高度 */
+  min-height: calc(100vh - 40px); /* 没有tabbar时也要减去版权栏 */
 }
 
 .copyright {
@@ -82,6 +100,8 @@ const onClickLeft = () => {
   border-top: 1px solid #ebedf0;
   padding: 12px 16px;
   margin-top: auto; /* 推到底部 */
+  height: 40px;
+  box-sizing: border-box;
 }
 
 .copyright-text {

@@ -8,12 +8,8 @@
 
 <template>
   <div class="cart-container">
-    <van-nav-bar
-      title="购物车"
-      left-arrow
-      @click-left="onClickLeft"
-    />
-
+    <!-- 移除 CommonNavBar -->
+    <!-- 其余内容保留 -->
     <template v-if="cartStore.items.length > 0">
       <div class="cart-list">
         <van-swipe-cell v-for="item in cartStore.items" :key="item.productId + (item.skuId || '')">
@@ -86,13 +82,12 @@ import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { Toast } from 'vant'; // Use Toast directly
 import { useCartStore } from '../stores/cart';
+import CommonNavBar from '@/components/CommonNavBar.vue';
 
 const router = useRouter();
 const cartStore = useCartStore();
 
-const onClickLeft = () => {
-  router.back();
-};
+
 
 // 计算属性：是否全选
 const allSelected = computed(() => {
@@ -116,20 +111,20 @@ const onSubmitOrder = () => {
 <style scoped>
 .cart-container {
   padding-bottom: 50px; /* 为底部提交栏留出空间 */
-  min-height: 100vh;
+  min-height: calc(100vh - 50px - 40px - 50px); /* 预留tabbar、版权栏、提交栏空间 */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
 
-.van-nav-bar {
+.common-nav-bar {
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
 .cart-list {
-  flex: 1;
-  overflow-y: auto;
+  /* 移除 flex: 1; 和 overflow-y: auto; 让内容自适应 */
   padding-top: 5px;
   padding-bottom: 10px; /* 留出空间给提交栏 */
 }

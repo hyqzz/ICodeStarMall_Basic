@@ -9,11 +9,7 @@
 <template>
   <div class="order-detail-container">
     <!-- 顶栏 -->
-    <van-nav-bar
-      title="订单详情"
-      left-arrow
-      @click-left="onClickLeft"
-    />
+    <!-- 移除 <van-nav-bar title="订单详情" /> -->
 
     <div v-if="order" class="order-content">
       <!-- 订单状态 -->
@@ -146,10 +142,10 @@ watch(() => route.params.id, (newId) => {
   }
 }, { immediate: true });
 
-// 返回上一页
-const onClickLeft = () => {
-  router.back();
-};
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
+
 
 // 格式化日期时间
 const formatDate = (dateString: string) => {
@@ -262,7 +258,7 @@ const confirmReceipt = () => {
 
 <style scoped>
 .order-detail-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 50px - 40px - 50px); /* 预留tabbar、版权栏、底部操作栏空间 */
   display: flex;
   flex-direction: column;
 }

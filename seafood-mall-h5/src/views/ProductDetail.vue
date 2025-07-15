@@ -9,11 +9,7 @@
 <template>
   <div class="product-detail-container">
     <!-- 顶栏 -->
-    <van-nav-bar
-      title="商品详情"
-      left-arrow
-      @click-left="onClickLeft"
-    />
+    <CommonNavBar title="商品详情" />
 
     <div v-if="product" class="product-content">
       <!-- 商品图片轮播 -->
@@ -210,10 +206,7 @@ watch(() => route.query.selectedAddress, (newSelectedAddress) => {
   }
 }, { immediate: true });
 
-// 返回上一页
-const onClickLeft = () => {
-  router.back();
-};
+
 
 // 打开规格弹窗时获取规格
 const onShowSkuPopup = async () => {
@@ -222,6 +215,7 @@ const onShowSkuPopup = async () => {
 };
 
 onMounted(() => {
+  window.scrollTo(0, 0);
   fetchDefaultAddress();
   checkSelectedAddress(); // 检查是否有选中的地址
 });
@@ -334,6 +328,7 @@ const fixedDescription = computed(() => {
   flex: 1;
   overflow-y: auto;
   padding-bottom: 60px; /* 为底部操作栏留出空间 */
+  min-height: calc(100vh - 50px - 40px - 50px); /* 预留tabbar、版权栏、底部操作栏空间 */
 }
 
 .product-swipe {

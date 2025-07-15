@@ -57,7 +57,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Override
     public List<Category> getAllCategories() {
         log.info("Fetching all categories.");
-        List<Category> categories = list();
+        LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
+        wrapper.orderByAsc(Category::getSort);
+        List<Category> categories = list(wrapper);
         log.info("Fetched {} categories.", categories.size());
         return categories;
     }

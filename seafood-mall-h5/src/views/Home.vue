@@ -176,6 +176,7 @@ const addToCart = (product: any) => {
 };
 
 onMounted(async () => {
+  window.scrollTo(0, 0);
   try {
     // 获取轮播图
     const bannerRes = await request({ url: '/api/banners', method: 'get' });

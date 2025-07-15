@@ -8,19 +8,13 @@
 
 <template>
   <div class="product-list-container">
-    <!-- 顶栏 -->
-    <van-nav-bar
-      :title="categoryName || '商品列表'"
-      left-arrow
-      @click-left="onClickLeft"
-    />
-
     <!-- 搜索栏 -->
     <van-search
       v-model="searchKeyword"
-      placeholder="请输入商品名称"
+      placeholder="请输入搜索关键词"
+      show-action
       @search="onSearch"
-      @clear="onClearSearch"
+      @cancel="onClearSearch"
     />
 
     <div class="main-content">
@@ -77,6 +71,7 @@ import { getAllCategories } from '@/api/category';
 import { getProducts } from '@/api/product';
 import { useCartStore } from '@/stores/cart';
 import { Toast } from 'vant';
+import CommonNavBar from '@/components/CommonNavBar.vue';
 
 // 在页面内定义 ProductItem 接口类型
 interface ProductItem {
@@ -114,7 +109,7 @@ const currentPage = ref(1);
 const pageSize = ref(10);
 const total = ref(0);
 const selectedCategoryId = ref<number | null>(null);
-const activeCategoryIndex = ref(0); // 当前激活的分类索引
+const activeCategoryIndex = ref(-1); // 默认不选中任何项
 const categoryName = ref<string | undefined>(undefined); // 当前选中的分类名称
 const searchKeyword = ref<string | undefined>(undefined); // 搜索关键词
 const finished = ref(false);
@@ -183,8 +178,16 @@ const loadCategories = async () => {
 watch(
   () => route.query.categoryId,
   (newCategoryId, oldCategoryId) => {
+    // categories 未加载时不处理
+    if (!categories.value || categories.value.length === 0) return;
     if (newCategoryId !== oldCategoryId) {
       selectedCategoryId.value = newCategoryId ? Number(newCategoryId) : null;
+      if (newCategoryId) {
+        const idx = categories.value.findIndex(c => c.id === Number(newCategoryId));
+        activeCategoryIndex.value = idx;
+      } else {
+        activeCategoryIndex.value = -1;
+      }
       categoryName.value = route.query.categoryName as string | undefined;
       searchKeyword.value = route.query.keyword as string | undefined;
       currentPage.value = 1;
@@ -198,14 +201,18 @@ watch(
 
 // 处理分类选择
 const selectCategory = (id: number, name: string) => {
+  const idx = categories.value.findIndex(c => c.id === id);
   if (selectedCategoryId.value === id) return;
   selectedCategoryId.value = id;
+  activeCategoryIndex.value = idx;
   categoryName.value = name;
   searchKeyword.value = undefined;
   currentPage.value = 1;
   products.value = [];
   finished.value = false;
-  // 通过路由跳转，触发watch
+  // 直接加载商品，不依赖路由变化
+  loadProducts();
+  // 可选：同步路由参数（不再依赖watch加载商品）
   router.replace({
     query: { ...route.query, categoryId: id, categoryName: name }
   });
@@ -219,9 +226,7 @@ const handlePageChange = (page: number) => {
 };
 
 // 返回上一页
-const onClickLeft = () => {
-  router.back();
-};
+
 
 // 搜索商品
 const onSearch = () => {
@@ -235,7 +240,8 @@ const onClearSearch = () => {
 };
 
 onMounted(() => {
-  console.log('ProductList component mounted');
+  window.scrollTo(0, 0);
+  activeCategoryIndex.value = -1;
   loadCategories();
   // 页面初次加载时也要加载商品
   currentPage.value = 1;
@@ -263,15 +269,34 @@ const addToCart = (product: ProductItem) => {
 <style scoped>
 .product-list-container {
   padding: 20px;
+  min-height: calc(100vh - 50px - 40px - 50px); /* 预留tabbar、版权栏、底部操作栏空间 */
+  box-sizing: border-box;
+  overflow-x: hidden; /* 防止横向滚动条 */
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .left-sidebar {
-  width: 200px;
-  margin-right: 20px;
+  width: 90px;
+  min-width: 70px;
+  max-width: 120px;
+  margin-right: 10px;
+  box-sizing: border-box;
 }
 
 .right-product-display {
   flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .product-card-list {
@@ -284,20 +309,20 @@ const addToCart = (product: ProductItem) => {
   display: flex;
   align-items: center;
   background: #fff;
-  border-radius: 14px;
+  border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  padding: 12px 16px;
+  padding: 8px 10px;
   position: relative;
-  min-height: 110px;
-  margin-bottom: 16px;
+  min-height: 80px;
+  margin-bottom: 10px;
   width: 100%;
   box-sizing: border-box;
 }
 
 .card-left {
-  width: 100px;
-  height: 100px;
-  border-radius: 12px;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
   overflow: hidden;
   background: #f7f7f7;
   display: flex;
@@ -310,7 +335,7 @@ const addToCart = (product: ProductItem) => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .card-main {
@@ -319,27 +344,27 @@ const addToCart = (product: ProductItem) => {
   flex-direction: column;
   justify-content: center;
   min-width: 0;
-  margin-left: 16px;
+  margin-left: 10px;
 }
 
 .card-title {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
   color: #222;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .card-sold {
-  font-size: 14px;
+  font-size: 12px;
   color: #aaa;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .card-price {
-  font-size: 20px;
+  font-size: 16px;
   color: #1e90ff;
   font-weight: bold;
   margin-top: auto;
@@ -347,8 +372,8 @@ const addToCart = (product: ProductItem) => {
 
 .card-cart-btn {
   position: absolute;
-  right: 18px;
-  bottom: 18px;
+  right: 10px;
+  bottom: 10px;
   cursor: pointer;
 }
 

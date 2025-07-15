@@ -9,12 +9,6 @@
 <template>
   <div class="user-address-list-container">
     <!-- 顶栏 -->
-    <van-nav-bar
-      :title="isSelectMode ? '选择收货地址' : '我的收货地址'"
-      left-arrow
-      @click-left="onClickLeft"
-    />
-
     <van-address-list
       v-model="chosenAddressId"
       :list="addressList"
@@ -54,9 +48,7 @@ const loading = ref(true);
 // 判断是否为选择模式
 const isSelectMode = computed(() => route.query.selectMode === 'true');
 
-const onClickLeft = () => {
-  router.back();
-};
+
 
 const fetchAddresses = async () => {
   loading.value = true;
@@ -155,18 +147,19 @@ const onSelectAddress = async (item: UserAddress) => {
 };
 
 onMounted(() => {
+  window.scrollTo(0, 0);
   fetchAddresses();
 });
 </script>
 
 <style scoped>
 .user-address-list-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 50px - 40px - 50px); /* 预留tabbar、版权栏、底部操作栏空间 */
   display: flex;
   flex-direction: column;
 }
 
-.van-nav-bar {
+.common-nav-bar {
   position: sticky;
   top: 0;
   z-index: 100;

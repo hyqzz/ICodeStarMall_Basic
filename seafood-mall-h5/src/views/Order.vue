@@ -9,11 +9,7 @@
 <template>
   <div class="order-container">
     <!-- 顶栏 -->
-    <van-nav-bar
-      title="订单确认"
-      left-arrow
-      @click-left="onClickLeft"
-    />
+    <!-- 移除 <van-nav-bar title="订单确认" /> -->
 
     <div v-if="orderItems.length > 0" class="order-content">
       <!-- 地址信息 (占位，待集成用户地址管理) -->
@@ -216,9 +212,7 @@ const initOrderData = () => {
   }
 };
 
-const onClickLeft = () => {
-  router.back();
-};
+
 
 const onConfirmPayment = (value: any) => {
   if (value && value.value) {
@@ -314,6 +308,7 @@ const loadAddresses = async () => {
 };
 
 onMounted(async () => {
+  window.scrollTo(0, 0);
   await loadAddresses();
   initOrderData();
 });
@@ -321,7 +316,7 @@ onMounted(async () => {
 
 <style scoped>
 .order-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 50px - 40px - 50px); /* 预留tabbar、版权栏、底部操作栏空间 */
   display: flex;
   flex-direction: column;
 }
